@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.808.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreApp.Web", "StoreApp.Web\StoreApp.Web.csproj", "{2093DCE1-9EDC-45F6-B7C1-CB4D63CBB79D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreApp.DataModel", "StoreApp.DataModel\StoreApp.DataModel.csproj", "{F7265ADF-2891-4DC3-BC09-D69E27E29F35}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreApp.Library", "StoreApp.Library\StoreApp.Library.csproj", "{0E3049C4-B56E-4DE4-B47C-03884C4BBDBF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2093DCE1-9EDC-45F6-B7C1-CB4D63CBB79D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2093DCE1-9EDC-45F6-B7C1-CB4D63CBB79D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2093DCE1-9EDC-45F6-B7C1-CB4D63CBB79D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2093DCE1-9EDC-45F6-B7C1-CB4D63CBB79D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7265ADF-2891-4DC3-BC09-D69E27E29F35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7265ADF-2891-4DC3-BC09-D69E27E29F35}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7265ADF-2891-4DC3-BC09-D69E27E29F35}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7265ADF-2891-4DC3-BC09-D69E27E29F35}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E3049C4-B56E-4DE4-B47C-03884C4BBDBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E3049C4-B56E-4DE4-B47C-03884C4BBDBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E3049C4-B56E-4DE4-B47C-03884C4BBDBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E3049C4-B56E-4DE4-B47C-03884C4BBDBF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8F4D4098-3A94-4EC5-9A22-77C371560E25}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+	EndGlobalSection
+EndGlobal
