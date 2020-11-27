@@ -14,11 +14,16 @@ namespace StoreApp.Library
 
         public string State { get; set; }
 
+        public List<Inventory> Inventory { get; set; }
+
         public Dictionary<string, int> Inventories { get; set; }
 
         private static int LocationIdSeed = 1;
 
-        public Location() { }
+        public Location()
+        {
+            Inventory = new List<Inventory>();
+        }
 
         public Location(int id, string name, string address, string city, string state)
         {
@@ -38,44 +43,6 @@ namespace StoreApp.Library
 
         }
 
-        //add inventory
-        public void addInventory(string name, int quantity)
-        {
-            if (Inventories.ContainsKey(name))
-            {
-                Inventories[name] += quantity;
-            }
-            else
-            {
-                Inventories.Add(name, quantity);
-            }
-
-        }
-        //remove inventory
-        public void reduceInventory(string name, int quantity)
-        {
-            Inventories[name] -= quantity;
-        }
-
-        public void deleteItemsFromInventory(string name)
-        {
-            Inventories.Remove(name);
-        }
-
-        public List<string> getInventory()
-        {
-            var inventory = new List<string>();
-            int index = 1;
-
-            foreach (KeyValuePair<string, int> product in Inventories)
-            {
-                string value = $"{index.ToString()}\t{product.Key}\t{product.Value.ToString()}";
-                inventory.Add(value);
-                index++;
-            }
-
-            return inventory;
-        }
 
     }
 

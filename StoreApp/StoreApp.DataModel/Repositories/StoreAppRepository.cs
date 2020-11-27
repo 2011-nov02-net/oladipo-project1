@@ -47,16 +47,47 @@ namespace StoreApp.DataModel.Repositories
         /// Get a Location by ID.
         /// </summary>
         /// <returns>The Location</returns>
-        public Location GetLocationById(int locationId)
+        public Library.Location GetLocationById(int locationId)
         {
             using var context = new project0Context(_dbContext);
 
             var dbLocation = context.Locations
-            .Include(o => o.Inventories)
-            .ThenInclude(o => o.Product)
-            .First(o => o.LocationId == locationId);
+                .Where(o => o.LocationId == locationId)
+                .FirstOrDefault();
+            var location = new Library.Location()
+            {
+                LocationId = dbLocation.LocationId,
+                Name = dbLocation.Name,
+                Address = dbLocation.Address,
+                City = dbLocation.City,
+                State = dbLocation.State
+            };
+            var locationInventory = GetInventoryByLocation(location);
+                foreach ( var product in locationInventory)
+            {
+                location.Inventory.Add(product);
+            }
+            return location;
+        }
 
-            return dbLocation;
+        public List<Library.Inventory> GetInventoryByLocation(Library.Location location)
+        {
+            using var context = new project0Context(_dbContext);
+
+            var dbInventroy = context.Inventories
+                .Where(o => o.LocationId == location.LocationId)
+                .Include(o => o.Product)
+                .ToList();
+            
+            var inventory = new List<Library.Inventory>();
+            foreach(var inv in dbInventroy)
+            {
+                var newProduct = new Library.Inventory(inv.LocationId, inv.Product.ProductId, inv.Quantity);
+                newProduct.ProductId = inv.ProductId;
+                inventory.Add(newProduct);
+
+            }
+            return inventory;
         }
         /// <summary>
         /// Update an Inventory

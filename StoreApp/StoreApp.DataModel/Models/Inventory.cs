@@ -13,5 +13,15 @@ namespace StoreApp.DataModel
 
         public virtual Location Location { get; set; }
         public virtual Product Product { get; set; }
+
+        public Inventory(int locationId, int productId, int quantity)
+        {
+
+            LocationId = locationId;
+            ProductId = productId;
+            Quantity = quantity;
+        }
+
+        public Inventory() { }
     }
 }

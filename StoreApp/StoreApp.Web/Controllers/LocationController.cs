@@ -32,10 +32,12 @@ namespace StoreApplication.WebApp.Controllers
             {
                 return NotFound();
             }
-           // TempData["LocationId"] = Location.Id;
 
-            var orders = _storeRepo.GetOrdersByLocationId(id);
-            return View(orders);
+            var location = _storeRepo.GetLocationById(id);
+
+            TempData["LocationId"] = location.LocationId;
+
+            return View(location);
         }
 
         //GET - CREATE
