@@ -63,7 +63,7 @@ namespace StoreApp.DataModel.Repositories
                 State = dbLocation.State
             };
             var locationInventory = GetInventoryByLocation(location);
-                foreach ( var product in locationInventory)
+            foreach (var product in locationInventory)
             {
                 location.Inventory.Add(product);
             }
@@ -78,9 +78,9 @@ namespace StoreApp.DataModel.Repositories
                 .Where(o => o.LocationId == location.LocationId)
                 .Include(o => o.Product)
                 .ToList();
-            
+
             var inventory = new List<Library.Inventory>();
-            foreach(var inv in dbInventroy)
+            foreach (var inv in dbInventroy)
             {
                 var newProduct = new Library.Inventory(inv.LocationId, inv.Product.ProductId, inv.Quantity);
                 newProduct.ProductId = inv.ProductId;
@@ -89,7 +89,26 @@ namespace StoreApp.DataModel.Repositories
             }
             return inventory;
         }
-        /// <summary>
+
+        public List<OrderDetail> GetOrderDetails(int id)
+         {
+            using var context = new project0Context(_dbContext);
+
+            var dbOrders = context.OrderDetails
+            .Include(o => o.Product)
+            .Include(o => o.Order)
+            .Where(o => o.OrderId == id);
+
+            var products= new List<OrderDetail>();
+            foreach (var product in dbOrders)
+            { 
+                products.Add(product);
+            }
+            return products;
+
+        }
+
+         /// <summary>
         /// Update an Inventory
         /// </summary>
         /// <returns>The Inventory with changed values</return>
