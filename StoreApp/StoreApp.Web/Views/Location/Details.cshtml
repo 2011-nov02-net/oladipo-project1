@@ -1,4 +1,4 @@
-﻿@model   StoreApp.DataModel.Location
+﻿@model   StoreApp.Library.Location
 
 @{
     ViewData["Title"] = "Details";
@@ -32,22 +32,21 @@
             @Html.DisplayFor(model => model.State)
         </dd>
     </dl>
-    @*<h4>Inventory</h4>
-    <p>
-        <a asp-action="ImportAnimal" asp-route-id="@Model.Id">Import new animal</a>
-    </p>
-    <hr />
-    <dl class="row">
-        <dd class="col-sm-10">
-            @await Html.PartialAsync("_InventoryDetails", Model.Inventory)
-        </dd>
-    </dl>*@
+    <div class="col-6">
+        <a asp-action="" asp-controller="Inventory" asp-route-id="@Model.LocationId"class="btn btn-primary">Inventory</a>
+    </div>
+    <br /> 
+    <div class="col-6">
+        <a asp-action="" asp-controller="Order" asp-route-id="@Model.LocationId"class="btn btn-primary">Orders</a>
+    </div>
 </div>
+
+<hr/>
 <div>
 
 
-    @*<div class="col-6">
+    <div class="col-6">
             <a asp-action="Create" asp-controller="Location" class="btn btn-secondary">Add a new Location</a>
-        </div>*@
+        </div>
 
 </div>

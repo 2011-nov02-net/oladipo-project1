@@ -29,5 +29,6 @@
   <ItemGroup>
     <Folder Include="Views\Product\" />
     <Folder Include="Views\Location\" />
+    <Folder Include="Views\Inventory\" />
   </ItemGroup>
 </Project>
