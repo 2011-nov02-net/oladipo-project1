@@ -30,5 +30,6 @@
     <Folder Include="Views\Product\" />
     <Folder Include="Views\Location\" />
     <Folder Include="Views\Inventory\" />
+    <Folder Include="Views\Order\" />
   </ItemGroup>
 </Project>
