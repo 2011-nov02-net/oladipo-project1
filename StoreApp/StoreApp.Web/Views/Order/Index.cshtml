@@ -33,14 +33,14 @@
         <tbody>
             @foreach (var order in Model)
             {
-            <tr>
-                <th scope="row">@order.OrderId</th>
-                <td>@(order.Customer.FirstName + " " + order.Customer.LastName)</td>
-                <td>@order.Date</td>
-                <td><a asp-area="" asp-controller="Order" asp-action="Details" asp-route-id="@order.OrderId"class="btn btn-primary">Details</a></td>
-            </tr>
+                <tr>
+                    <th scope="row">@order.OrderId</th>
+                    <td>@(order.Customer.FirstName + " " + order.Customer.LastName)</td>
+                    <td>@order.Date</td>
+                    <td><a asp-area="" asp-controller="Order" asp-action="Details" asp-route-id="@order.OrderId" class="btn btn-primary">Details</a></td>
+                </tr>
             }
         </tbody>
     </table>
-
+    <a asp-action="Create" asp-controller="Order" class="btn btn-primary">Place Order</a>
 </div>

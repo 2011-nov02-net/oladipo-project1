@@ -311,6 +311,14 @@ namespace StoreApp.DataModel.Repositories
             return dbOrders;
         }
 
+        public Library.Customer GetCustomerById( int customerId)
+        {
+            using var context = new project0Context(_dbContext);
+            var dbCustomer = context.Customers.FirstOrDefault(o => o.CustomerId == customerId);
+            var appCustomer = new Library.Customer(dbCustomer.CustomerId,dbCustomer.FirstName, dbCustomer.LastName, dbCustomer.Email);
+            return appCustomer;
+        }
+
         /// <summary>
         /// Gets Customer By Name
         /// </summary>
