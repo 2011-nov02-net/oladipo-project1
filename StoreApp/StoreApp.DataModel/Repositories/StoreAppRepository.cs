@@ -263,10 +263,16 @@ namespace StoreApp.DataModel.Repositories
         public void AddOrderByCustomerId(int customerId, int locationId)
         {
             using var context = new project0Context(_dbContext);
-            var dbOrders = new DataModel.Order()
+            var appOrders = new Library.Order()
             {
                 CustomerId = customerId,
                 LocationId = locationId,
+
+            };
+            var dbOrders = new DataModel.Order()
+            {
+                CustomerId = appOrders.CustomerId,
+                LocationId = appOrders.LocationId
                 // OrderDetails.Quantity = quantity,
             };
 

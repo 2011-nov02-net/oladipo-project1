@@ -41,14 +41,14 @@ namespace StoreApp.Web.Controllers
             var allLocations = _storeRepo.GetLocations();
 
             var allCustomer = _storeRepo.GetCustomers();
-           
+
             var newOrder = new OrderViewModel();
-      
-            foreach ( var customer in allCustomer)
+
+            foreach (var customer in allCustomer)
             {
                 newOrder.Customers.Add(customer);
             }
-           foreach( var location in allLocations)
+            foreach (var location in allLocations)
             {
                 newOrder.Locations.Add(location);
             };
@@ -73,6 +73,19 @@ namespace StoreApp.Web.Controllers
 
 
             return View(mymodel);
+        }
+
+        //POST - CREATE
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(OrderViewModel order)
+        {
+            if (ModelState.IsValid)
+            {
+                _storeRepo.AddOrderByCustomerId(order.CustomerId, order.LocationId);
+                return RedirectToAction("Details");
+            }
+            return View();
         }
     }
 }
