@@ -38,17 +38,17 @@ namespace StoreApp.Web.Controllers
         public IActionResult Create()
 
         {
-            var allLocations = _storeRepo.GetLocations();
+            var locations = _storeRepo.GetLocations();
 
-            var allCustomer = _storeRepo.GetCustomers();
+            var customers = _storeRepo.GetCustomers();
 
             var newOrder = new OrderViewModel();
 
-            foreach (var customer in allCustomer)
+            foreach (var customer in customers)
             {
                 newOrder.Customers.Add(customer);
             }
-            foreach (var location in allLocations)
+            foreach (var location in locations)
             {
                 newOrder.Locations.Add(location);
             };
@@ -76,16 +76,46 @@ namespace StoreApp.Web.Controllers
         }
 
         //POST - CREATE
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(Library.Order order)
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create(OrderViewModel order)
+        //{
+        //    var customer = _storeRepo.GetCustomerById(order.CustomerId);
+        //    var location = _storeRepo.GetLocationById(order.LocationId);
+
+        //    var newOrder = new DataModel.Order
+        //    {
+        //        Customer = customer,
+        //        Location = location,
+        //        Date = DateTime.Now
+        //    };
+
+        //    _storeRepo.InsertOrder(newOrder);
+
+        //    return RedirectToAction("Index");
+
+        //}
+        public ActionResult AddItem(int id)
         {
-            if (ModelState.IsValid)
+            var orderItem = new OrderDetailViewModel();
+
+            orderItem.OrderId = id;
+            orderItem.Quantity = 1;
+            var products = _storeRepo.GetProducts();
+            foreach (var product in products)
             {
-                _storeRepo.AddOrderByCustomer(order);
-                return RedirectToAction("Details");
+                orderItem.Products.Add(product);
             }
-            return View();
+            return View(orderItem);
         }
+
+
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public IActionResult AddItem(OrderDetailViewModel orderDetail)
+        //{
+        //    t
+        //}
     }
 }
