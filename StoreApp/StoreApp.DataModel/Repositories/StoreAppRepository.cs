@@ -228,6 +228,21 @@ namespace StoreApp.DataModel.Repositories
             context.SaveChanges();
 
         }
+        public void AddOrderByCustomer(Library.Order order)
+        {
+            using var context = new project0Context(_dbContext);
+
+            var dbOrder = new DataModel.Order()
+            {
+                CustomerId = order.CustomerId,
+                LocationId = order.LocationId,
+
+            };
+
+            context.Add(dbOrder);
+            context.SaveChanges();
+        }
+
 
         public void AddProduct(Library.Product product)
         {
@@ -272,7 +287,7 @@ namespace StoreApp.DataModel.Repositories
             var dbOrders = new DataModel.Order()
             {
                 CustomerId = appOrders.CustomerId,
-                LocationId = appOrders.LocationId
+                LocationId = appOrders.LocationId,
                 // OrderDetails.Quantity = quantity,
             };
 
@@ -280,6 +295,7 @@ namespace StoreApp.DataModel.Repositories
             context.SaveChanges();
         }
 
+        
 
         /// <summary>
         /// Gets Inventory of a Location

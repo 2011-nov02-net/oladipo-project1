@@ -78,11 +78,11 @@ namespace StoreApp.Web.Controllers
         //POST - CREATE
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(OrderViewModel order)
+        public ActionResult Create(Library.Order order)
         {
             if (ModelState.IsValid)
             {
-                _storeRepo.AddOrderByCustomerId(order.CustomerId, order.LocationId);
+                _storeRepo.AddOrderByCustomer(order);
                 return RedirectToAction("Details");
             }
             return View();
