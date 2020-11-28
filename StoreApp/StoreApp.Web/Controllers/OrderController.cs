@@ -35,7 +35,9 @@ namespace StoreApp.Web.Controllers
             return View(inventory);
         }
 
-        public IActionResult Create()
+        //CREATE
+
+        public ActionResult Create()
 
         {
             var locations = _storeRepo.GetLocations();
@@ -56,7 +58,18 @@ namespace StoreApp.Web.Controllers
             return View(newOrder);
         }
 
-
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(StoreApp.Library.Order order)
+        {
+          
+            if (ModelState.IsValid)
+            {
+                _storeRepo.AddOrder(order);
+                return RedirectToAction($"Index/{order.LocationId}");
+            }
+            return View("Index");
+        }
 
         public IActionResult Details(int id)
         {
@@ -75,26 +88,7 @@ namespace StoreApp.Web.Controllers
             return View(mymodel);
         }
 
-        //POST - CREATE
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create(OrderViewModel order)
-        //{
-        //    var customer = _storeRepo.GetCustomerById(order.CustomerId);
-        //    var location = _storeRepo.GetLocationById(order.LocationId);
-
-        //    var newOrder = new DataModel.Order
-        //    {
-        //        Customer = customer,
-        //        Location = location,
-        //        Date = DateTime.Now
-        //    };
-
-        //    _storeRepo.InsertOrder(newOrder);
-
-        //    return RedirectToAction("Index");
-
-        //}
+        
         public ActionResult AddItem(int id)
         {
             var orderItem = new OrderDetailViewModel();
@@ -109,13 +103,5 @@ namespace StoreApp.Web.Controllers
             return View(orderItem);
         }
 
-
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult AddItem(OrderDetailViewModel orderDetail)
-        //{
-        //    t
-        //}
     }
 }

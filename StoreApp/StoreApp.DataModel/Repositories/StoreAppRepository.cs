@@ -228,7 +228,7 @@ namespace StoreApp.DataModel.Repositories
             context.SaveChanges();
 
         }
-        public void AddOrderByCustomer(Library.Order order)
+        public void AddOrder(Library.Order order)
         {
             using var context = new project0Context(_dbContext);
 
@@ -236,6 +236,7 @@ namespace StoreApp.DataModel.Repositories
             {
                 CustomerId = order.CustomerId,
                 LocationId = order.LocationId,
+                Date       = order.Date
 
             };
 
