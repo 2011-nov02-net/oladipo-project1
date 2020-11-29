@@ -19,9 +19,14 @@ namespace StoreApplication.WebApp.Controllers
         }
 
         //GET - Customer
-        public IActionResult Index()
+        public IActionResult Index(string searchString)
         {
             var customers= _storeRepo.GetCustomers();
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                string[] nameList = searchString.Split(' ');
+                customers = customers.Where(r => nameList.All(n => n.ToLower().Contains(n.ToLower()))).ToList();
+            }
             return View(customers);
         }
 
