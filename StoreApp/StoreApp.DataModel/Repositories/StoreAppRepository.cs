@@ -228,6 +228,21 @@ namespace StoreApp.DataModel.Repositories
             context.SaveChanges();
 
         }
+
+        public void AddOrderItem(int orderId, int productId, int quantity)
+        {
+            using var context = new project0Context(_dbContext);
+
+            var dbItem = new OrderDetail()
+            {
+                OrderId = orderId,
+                ProductId = productId,
+                Quantity = quantity
+            };
+
+            context.Add(dbItem);
+            context.SaveChanges();
+        }
         public void AddOrder(Library.Order order)
         {
             using var context = new project0Context(_dbContext);
@@ -296,6 +311,7 @@ namespace StoreApp.DataModel.Repositories
             context.SaveChanges();
         }
 
+     
         
 
         /// <summary>

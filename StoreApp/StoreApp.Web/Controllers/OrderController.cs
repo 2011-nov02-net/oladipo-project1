@@ -71,7 +71,7 @@ namespace StoreApp.Web.Controllers
             return View("Index");
         }
 
-        public IActionResult Details(int id)
+        public ActionResult Details(int id)
         {
             if (id < 0)
             {
@@ -103,5 +103,17 @@ namespace StoreApp.Web.Controllers
             return View(orderItem);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddItem(StoreApp.Library.OrderDetail item)
+        {
+
+            if (ModelState.IsValid)
+            {
+                _storeRepo.AddOrderItem(item.OrderId, item.ProductId, item.Quantity);
+                return RedirectToAction($"Index");
+            }
+            return View("Index");
+        }
     }
 }
