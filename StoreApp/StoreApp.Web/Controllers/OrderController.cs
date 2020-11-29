@@ -66,7 +66,7 @@ namespace StoreApp.Web.Controllers
             if (ModelState.IsValid)
             {
                 _storeRepo.AddOrder(order);
-                return RedirectToAction($"Index/{order.LocationId}");
+                return RedirectToAction(nameof(Details), new { id = order.OrderId });
             }
             return View("Index");
         }
@@ -110,8 +110,8 @@ namespace StoreApp.Web.Controllers
 
             if (ModelState.IsValid)
             {
-                _storeRepo.AddOrderItem(item.OrderId, item.ProductId, item.Quantity);
-                return RedirectToAction($"Index");
+                _storeRepo.AddOrderItem(item);
+                return RedirectToAction(nameof(Details), new { id = item.OrderId });
             }
             return View("Index");
         }

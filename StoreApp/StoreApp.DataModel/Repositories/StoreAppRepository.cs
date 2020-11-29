@@ -229,15 +229,15 @@ namespace StoreApp.DataModel.Repositories
 
         }
 
-        public void AddOrderItem(int orderId, int productId, int quantity)
+        public void AddOrderItem(Library.OrderDetail orderItem)
         {
             using var context = new project0Context(_dbContext);
 
             var dbItem = new OrderDetail()
             {
-                OrderId = orderId,
-                ProductId = productId,
-                Quantity = quantity
+                OrderId = orderItem.OrderId,
+                ProductId = orderItem.ProductId,
+                Quantity = orderItem.Quantity
             };
 
             context.Add(dbItem);
