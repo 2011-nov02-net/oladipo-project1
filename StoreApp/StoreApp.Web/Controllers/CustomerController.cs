@@ -24,8 +24,13 @@ namespace StoreApplication.WebApp.Controllers
             var customers= _storeRepo.GetCustomers();
             if (!String.IsNullOrEmpty(searchString))
             {
-                string[] nameList = searchString.Split(' ');
-                customers = customers.Where(r => nameList.All(n => n.ToLower().Contains(n.ToLower()))).ToList();
+                string[] nameList= searchString.Split(' ');
+                string firstName = nameList[0];
+                string lastName = nameList[1];
+               customers = _storeRepo.GetCustomerByName(firstName, lastName);
+
+                return View(customers);
+
             }
             return View(customers);
         }

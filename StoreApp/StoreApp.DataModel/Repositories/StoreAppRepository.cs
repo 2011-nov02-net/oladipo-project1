@@ -14,7 +14,7 @@ namespace StoreApp.DataModel.Repositories
     /// <remarks>
     /// This class ought to have better exception handling and logging.
     /// </remarks>
-    public class StoreAppRepository : IStoreAppRepository
+    public class StoreAppRepository
     {
         private readonly DbContextOptions<project0Context> _dbContext;
 
@@ -362,14 +362,17 @@ namespace StoreApp.DataModel.Repositories
         /// Gets Customer By Name
         /// </summary>
         /// <returns>Customer</returns>
-        public Library.Customer GetCustomerByName(string firstName, string lastName)
+        public List<Library.Customer> GetCustomerByName(string firstName, string lastName)
         {
             using var context = new project0Context(_dbContext);
-            var dbCustomers = context.Customers.First(c => c.FirstName == firstName && c.LastName == lastName);
+            var dbCustomers = context.Customers.First(c => c.FirstName.ToLower() == firstName.ToLower() && c.LastName.ToLower() == lastName.ToLower());
 
             var customer = new Library.Customer(dbCustomers.CustomerId, dbCustomers.FirstName, dbCustomers.LastName, dbCustomers.Email);
 
-            return customer;
+            var appCustomer = new List<Library.Customer>();
+            appCustomer.Add(customer);
+
+            return appCustomer;
         }
 
 
