@@ -24,7 +24,7 @@ namespace StoreApplication.WebApp.Controllers
             var customers= _storeRepo.GetCustomers();
             if (!String.IsNullOrEmpty(searchString))
             {
-                string[] nameList= searchString.Split(' ');
+                string[] nameList= searchString.Split(' '); ///[firstname, lastname]
                 string firstName = nameList[0];
                 string lastName = nameList[1];
                customers = _storeRepo.GetCustomerByName(firstName, lastName);
