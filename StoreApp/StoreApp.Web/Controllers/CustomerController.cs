@@ -35,6 +35,19 @@ namespace StoreApplication.WebApp.Controllers
             return View(customers);
         }
 
+        //GET: /<controller>/
+        public IActionResult Details(int id)
+        {
+            if (id < 0)
+            {
+                return NotFound();
+            }
+            var orders = _storeRepo.GetCustomerOrders(id);
+
+            return View(orders);
+        }
+
+
         //GET - CREATE
         public ActionResult Create()
         {

@@ -47,7 +47,7 @@ namespace StoreApp.DataModel.Repositories
         /// Get a Location by ID.
         /// </summary>
         /// <returns>The Location</returns>
-        public Location GetLocationById(int locationId)
+        public Library.Location GetLocationById(int locationId)
         {
             using var context = new project0Context(_dbContext);
 
@@ -67,7 +67,7 @@ namespace StoreApp.DataModel.Repositories
             {
                 location.Inventory.Add(product);
             }
-            return dbLocation;
+            return location;
         }
 
         public List<Library.Inventory> GetInventoryByLocation(Library.Location location)
@@ -247,15 +247,12 @@ namespace StoreApp.DataModel.Repositories
         {
             using var context = new project0Context(_dbContext);
 
-            var dbCustomer = new Customer();
-
             var dbOrder = new DataModel.Order()
             {
                 CustomerId = order.CustomerId,
                 LocationId = order.LocationId,
-                Date = order.Date,
-                Customer = GetCustomerById(order.CustomerId), //revert this if it breaks other things 
-                Location = GetLocationById(order.LocationId)
+                Date       = order.Date
+
             };
 
             context.Add(dbOrder);
@@ -353,12 +350,12 @@ namespace StoreApp.DataModel.Repositories
             return dbOrders;
         }
 
-        public Customer GetCustomerById( int customerId)     //revert this
+        public Library.Customer GetCustomerById( int customerId)
         {
             using var context = new project0Context(_dbContext);
             var dbCustomer = context.Customers.FirstOrDefault(o => o.CustomerId == customerId);
             var appCustomer = new Library.Customer(dbCustomer.CustomerId,dbCustomer.FirstName, dbCustomer.LastName, dbCustomer.Email);
-            return dbCustomer;
+            return appCustomer;
         }
 
         /// <summary>

@@ -1,4 +1,4 @@
-﻿   using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +35,7 @@ namespace StoreApp.Web.Controllers
             return View(inventory);
         }
 
+     
         //CREATE
 
         public ActionResult Create()
@@ -60,14 +61,13 @@ namespace StoreApp.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(StoreApp.Library.Order order)
+        public ActionResult Create(Library.Order order)
         {
           
             if (ModelState.IsValid)
             {
                 _storeRepo.AddOrder(order);
-                // return RedirectToAction(nameof(Index), new { id = order.LocationId });
-                return RedirectToAction(nameof(Details), new { id = order.OrderId });
+                return RedirectToAction(nameof(Index), new { id = order.OrderId });
             }
             return View("Index");
         }
@@ -106,7 +106,7 @@ namespace StoreApp.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddItem(StoreApp.Library.OrderDetail item)
+        public ActionResult AddItem(Library.OrderDetail item)
         {
 
             if (ModelState.IsValid)

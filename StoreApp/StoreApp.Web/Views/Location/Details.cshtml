@@ -33,12 +33,12 @@
         </dd>
     </dl>
     <div class="col-6">
-        <a asp-action="" asp-controller="Inventory" asp-route-id="@Model.LocationId"class="btn btn-primary">Inventory</a>
-    </div>
+        <a asp-action="" asp-controller="Inventory" asp-route-id="@Model.LocationId" class="btn btn-primary">Inventory</a> |   <a asp-action="" asp-controller="Order" asp-route-id="@Model.LocationId" class="btn btn-primary">Orders</a>
+    </div> 
     <br /> 
-    <div class="col-6">
-        <a asp-action="" asp-controller="Order" asp-route-id="@Model.LocationId"class="btn btn-primary">Orders</a>
-    </div>
+
+  
+
 </div>
 
 <hr/>

@@ -1,0 +1,43 @@
+﻿@model IEnumerable<StoreApp.DataModel.Order>
+
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Orders</h2>
+        </div>
+    </div>
+
+    <br /><br />
+
+
+    <table class="table table-striped table-dark" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    Order Id
+                </th>
+                <th>
+                    Date
+                </th>
+                <th>
+                    Details
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model)
+            {
+                <tr>
+                    <th scope="row">@order.OrderId</th>
+                    <td>@order.Date</td>
+                    <td><a asp-area="" asp-controller="Order" asp-action="Details" asp-route-id="@order.OrderId" class="btn btn-primary">Details</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

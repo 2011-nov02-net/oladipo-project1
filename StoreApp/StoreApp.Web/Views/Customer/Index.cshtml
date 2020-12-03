@@ -35,6 +35,9 @@
                 <th>
                     Email
                 </th>
+                <th>
+                    Orders
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -45,7 +48,7 @@
                     <td>@customer.FirstName</td>
                     <td>@customer.LastName</td>
                     <td>@customer.Email</td>
-
+                    <td> <a asp-action="Details" asp-controller="Customer" asp-route-id="@customer.CustomerId" class="btn btn-primary">Orders</a></td>
                 </tr>
             }
         </tbody>
