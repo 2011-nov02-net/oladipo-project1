@@ -38,7 +38,7 @@ namespace StoreApp.DataModel.Repositories
 
             var dbLocations = context.Locations.ToList();
 
-            var appLocations = dbLocations.Select(l => new StoreApp.Library.Location(l.LocationId, l.Name, l.Address, l.City, l.State)).ToList();
+            var appLocations = dbLocations.Select(l => new Library.Location(l.LocationId, l.Name, l.Address, l.City, l.State)).ToList();
 
 
             return appLocations;
@@ -112,18 +112,18 @@ namespace StoreApp.DataModel.Repositories
         /// Update an Inventory
         /// </summary>
         /// <returns>The Inventory with changed values</return>
-        public DataModel.Inventory UpdateInventory(int locationId, int productId, int quantity)
+        public void  UpdateInventory(int locationId, int productId, int quantity)
         {
             using var context = new project0Context(_dbContext);
 
-            var inventory = context.Inventories
-            .Include(o => o.LocationId == locationId)
-            .Include(o => o.ProductId == productId)
-            .First();
+            var dbInventory = context.Inventories
+                .Where(o => o.LocationId == locationId && o.ProductId == productId)
+                .FirstOrDefault();
 
-            inventory.Quantity -= quantity;
+            dbInventory.Quantity = quantity;
+
             context.SaveChanges();
-            return inventory;
+        
         }
 
         /// <summary>
@@ -243,11 +243,11 @@ namespace StoreApp.DataModel.Repositories
             context.Add(dbItem);
             context.SaveChanges();
         }
-        public void AddOrder(Library.Order order)
+        public Library.Order AddOrder(Library.Order order)
         {
             using var context = new project0Context(_dbContext);
 
-            var dbOrder = new DataModel.Order()
+            var dbOrder = new Order()
             {
                 CustomerId = order.CustomerId,
                 LocationId = order.LocationId,
@@ -255,8 +255,18 @@ namespace StoreApp.DataModel.Repositories
 
             };
 
+            var appOrder = new Library.Order()
+            {
+                CustomerId = dbOrder.CustomerId,
+                LocationId = dbOrder.LocationId,
+                Date = dbOrder.Date
+            };
+
             context.Add(dbOrder);
             context.SaveChanges();
+
+            return appOrder;
+
         }
 
 
@@ -286,6 +296,21 @@ namespace StoreApp.DataModel.Repositories
                 State = location.State
         };
         }
+
+        public void UpdateOrderDetail(OrderDetail orderDetail)
+        {
+            using var context = new project0Context(_dbContext);
+
+            var dbOrderDetail = context.OrderDetails
+                .Where(o => o.OrderId == orderDetail.OrderId)
+                .FirstOrDefault();
+
+            dbOrderDetail.Quantity = orderDetail.Quantity;
+
+            context.SaveChanges();    
+        }
+
+
 
         /// <summary>
         /// Adds order to a particular customer

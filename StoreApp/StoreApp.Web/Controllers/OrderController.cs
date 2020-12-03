@@ -111,8 +111,38 @@ namespace StoreApp.Web.Controllers
 
             if (ModelState.IsValid)
             {
-                _storeRepo.AddOrderItem(item);
-                return RedirectToAction(nameof(Details), new { id = item.OrderId });
+                var order = _storeRepo.GetOrderById(item.OrderId);
+                var inventory = _storeRepo.GetInventoryByLocationId(item.Order.LocationId);
+                var product = inventory.Find(o => o.ProductId == item.ProductId);
+                if ( product.Quantity - item.Quantity < 0) 
+                {
+                    return RedirectToAction(nameof(Details), new { id = item.OrderId });
+                }
+                else
+                {
+                    if ( order.OrderDetails.Any(o => o.ProductId == item.ProductId))
+                    {
+                        foreach( var entry in order.OrderDetails)
+                        {
+                            if (entry.ProductId == item.ProductId)
+                            {
+                                entry.Quantity += item.Quantity;
+                                _storeRepo.UpdateOrderDetail(entry);
+                            }
+                         };
+
+                    }
+                    else
+                    {
+                        _storeRepo.AddOrderItem(item);
+
+                    }
+
+                    product.Quantity -= item.Quantity;
+
+                    _storeRepo.UpdateInventory(product.LocationId, product.ProductId, product.Quantity);
+                    return RedirectToAction(nameof(Details), new { id = item.OrderId });
+                }
             }
             return View("Index");
         }
