@@ -7,16 +7,17 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using StoreApp.DataModel.Repositories;
 using Microsoft.Extensions.Logging;
+using StoreApp.Library.Interfaces;
 
 namespace StoreApplication.WebApp.Controllers
 {
     public class CustomerController : Controller
     {
-        private StoreAppRepository _storeRepo;
+        private IStoreAppRepository _storeRepo;
 
         private readonly ILogger<CustomerController> _logger;
 
-        public CustomerController(StoreAppRepository storeRepo, ILogger<CustomerController> logger)
+        public CustomerController(IStoreAppRepository storeRepo, ILogger<CustomerController> logger)
         {
             _storeRepo = storeRepo;
 

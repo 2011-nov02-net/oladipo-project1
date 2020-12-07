@@ -7,6 +7,8 @@ using StoreApp.DataModel.Repositories;
 using StoreApp.Web.Models;
 using StoreApp.Web.Controllers;
 using StoreApp.Web;
+using System.Text;
+using System.Threading.Tasks;
 using StoreApp.Library;
 using Moq;
 using Xunit;
@@ -20,7 +22,7 @@ namespace StoreApp.UnitTest
         [Fact]
         public void Index_WithCustomers_DisplaysCustomers()
         {
-            var mockRepo = new Mock<StoreAppRepository>();
+            var mockRepo = new Mock<IStoreAppRepository>();
 
             var Customers = new List<Customer>();
 

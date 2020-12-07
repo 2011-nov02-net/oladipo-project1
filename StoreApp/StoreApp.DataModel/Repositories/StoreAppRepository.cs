@@ -14,7 +14,7 @@ namespace StoreApp.DataModel.Repositories
     /// <remarks>
     /// This class ought to have better exception handling and logging.
     /// </remarks>
-    public class StoreAppRepository : IStoreAppRepository
+    public class StoreAppRepository 
     {
         private readonly DbContextOptions<project0Context> _dbContext;
 

@@ -13,6 +13,7 @@ namespace StoreApp.Library.Interfaces
         void AddCustomer(Customer customer);
         List<Customer> GetCustomers();
         List<Customer> GetCustomerByName(string firstName, string lastName);
+        List<Order> GetCustomerOrders(int id);
 
     }
 }
