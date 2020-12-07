@@ -14,7 +14,7 @@ namespace StoreApp.DataModel.Repositories
     /// <remarks>
     /// This class ought to have better exception handling and logging.
     /// </remarks>
-    public class StoreAppRepository
+    public class StoreAppRepository : IStoreAppRepository
     {
         private readonly DbContextOptions<project0Context> _dbContext;
 
@@ -146,6 +146,10 @@ namespace StoreApp.DataModel.Repositories
             return appCustomer;
         }
 
+        ///<summary>
+        ///Gets alll products from database
+        ///</summary>
+        ///<returns>List of Products</returns>
         public List<Library.Product> GetProducts()
         {
             using var context = new project0Context(_dbContext);
@@ -216,7 +220,7 @@ namespace StoreApp.DataModel.Repositories
         {
             using var context = new project0Context(_dbContext);
 
-            var dbCustomer = new StoreApp.DataModel.Customer()
+            var dbCustomer = new Customer()
             {
 
                 FirstName = customer.FirstName,
@@ -274,7 +278,7 @@ namespace StoreApp.DataModel.Repositories
         {
             using var context = new project0Context(_dbContext);
 
-            var dbProduct = new Library.Product()
+            var dbProduct = new Product()
             {
                 Name = product.Name,
                 Price = product.Price

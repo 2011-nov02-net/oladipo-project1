@@ -6,16 +6,30 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using StoreApp.DataModel.Repositories;
+using Microsoft.Extensions.Logging;
+using StoreApp.Library.Interfaces;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace StoreApplication.WebApp.Controllers
 {
     public class CustomerController : Controller
     {
         private StoreAppRepository _storeRepo;
+        private IStoreAppRepository @object;
+        private NullLogger<CustomerController> nullLogger;
+        private readonly ILogger<CustomerController> _logger;
 
-        public CustomerController(StoreAppRepository storeRepo)
+        public CustomerController(StoreAppRepository storeRepo, ILogger<CustomerController> logger)
         {
             _storeRepo = storeRepo;
+
+            _logger = logger;
+        }
+
+        public CustomerController(IStoreAppRepository @object, NullLogger<CustomerController> nullLogger)
+        {
+            this.@object = @object;
+            this.nullLogger = nullLogger;
         }
 
         //GET - Customer

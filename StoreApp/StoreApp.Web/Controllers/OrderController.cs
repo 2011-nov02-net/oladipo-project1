@@ -67,7 +67,7 @@ namespace StoreApp.Web.Controllers
             if (ModelState.IsValid)
             {
                 _storeRepo.AddOrder(order);
-                return RedirectToAction(nameof(Index), new { id = order.OrderId });
+                return RedirectToAction(nameof(Details), new { id = order.OrderId });
             }
             return View("Index");
         }
@@ -112,37 +112,35 @@ namespace StoreApp.Web.Controllers
             if (ModelState.IsValid)
             {
                 var order = _storeRepo.GetOrderById(item.OrderId);
-                var inventory = _storeRepo.GetInventoryByLocationId(item.Order.LocationId);
+                var inventory = _storeRepo.GetInventoryByLocationId(order.LocationId);
                 var product = inventory.Find(o => o.ProductId == item.ProductId);
                 if ( product.Quantity - item.Quantity < 0) 
                 {
                     return RedirectToAction(nameof(Details), new { id = item.OrderId });
                 }
-                else
+                if ( order.OrderDetails.Any(o => o.ProductId == item.ProductId))
                 {
-                    if ( order.OrderDetails.Any(o => o.ProductId == item.ProductId))
-                    {
-                        foreach( var entry in order.OrderDetails)
-                        {
+                    foreach( var entry in order.OrderDetails)
+                         {
                             if (entry.ProductId == item.ProductId)
                             {
                                 entry.Quantity += item.Quantity;
                                 _storeRepo.UpdateOrderDetail(entry);
+                                return RedirectToAction(nameof(Details), new { id = item.OrderId });
                             }
                          };
 
-                    }
-                    else
-                    {
+                } else
+                {
                         _storeRepo.AddOrderItem(item);
 
-                    }
+                 }
 
                     product.Quantity -= item.Quantity;
 
                     _storeRepo.UpdateInventory(product.LocationId, product.ProductId, product.Quantity);
                     return RedirectToAction(nameof(Details), new { id = item.OrderId });
-                }
+               
             }
             return View("Index");
         }
