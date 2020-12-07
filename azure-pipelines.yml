@@ -29,4 +29,11 @@ steps:
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: dotnet build 
   workingDirectory: StoreApp
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'test'
+    arguments: '--configuration $(buildConfiguration)'
+    publishTestResults: true
+    workingDirectory: 'StoreApp'
+  
   
