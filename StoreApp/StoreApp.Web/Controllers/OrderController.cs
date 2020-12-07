@@ -69,17 +69,6 @@ namespace StoreApp.Web.Controllers
                var newOrder =  _storeRepo.AddOrder(order);
                 return RedirectToAction(nameof(Details), new { id = newOrder.OrderId });
             }
-
-            //if (ModelState.IsValid)
-            //{
-            //    var newOrder = new Library.Order()
-            //    {
-            //        CustomerId = order.CustomerId,
-            //        LocationId = order.LocationId
-            //    };
-            //    var addNewOrder = _storeRepo.AddOrder(newOrder);
-            //    return RedirectToAction(nameof(Details), new { id = addNewOrder.OrderId });
-            //}
             return View("Index");
         }
 
