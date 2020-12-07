@@ -247,7 +247,7 @@ namespace StoreApp.DataModel.Repositories
             context.Add(dbItem);
             context.SaveChanges();
         }
-        public Library.Order AddOrder(Library.Order order)
+        public Order AddOrder(Library.Order order)
         {
             using var context = new project0Context(_dbContext);
 
@@ -259,17 +259,17 @@ namespace StoreApp.DataModel.Repositories
 
             };
 
-            var appOrder = new Library.Order()
-            {
-                CustomerId = dbOrder.CustomerId,
-                LocationId = dbOrder.LocationId,
-                Date = dbOrder.Date
-            };
+            //var appOrder = new Library.Order()
+            //{
+            //    CustomerId = dbOrder.CustomerId,
+            //    LocationId = dbOrder.LocationId,
+            //    Date = dbOrder.Date
+            //};
 
             context.Add(dbOrder);
             context.SaveChanges();
 
-            return appOrder;
+            return GetOrderById(dbOrder.OrderId);
 
         }
 
@@ -375,7 +375,16 @@ namespace StoreApp.DataModel.Repositories
             .Where(o => o.OrderId == orderId)
             .Include(o => o.Customer)
             .Include(o => o.Location)
-            .First();
+            .FirstOrDefault();
+
+            var order = new Order()
+            {
+                OrderId = dbOrders.OrderId,
+                Date    = dbOrders.Date,
+                CustomerId = dbOrders.CustomerId,
+                LocationId = dbOrders.LocationId
+
+            };
             return dbOrders;
         }
 

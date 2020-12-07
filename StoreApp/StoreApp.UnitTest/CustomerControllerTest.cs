@@ -20,7 +20,7 @@ namespace StoreApp.UnitTest
         [Fact]
         public void Index_WithCustomers_DisplaysCustomers()
         {
-            var mockRepo = new Mock<IStoreAppRepository>();
+            var mockRepo = new Mock<StoreAppRepository>();
 
             var Customers = new List<Customer>();
 

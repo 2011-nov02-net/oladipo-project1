@@ -66,9 +66,20 @@ namespace StoreApp.Web.Controllers
           
             if (ModelState.IsValid)
             {
-                _storeRepo.AddOrder(order);
-                return RedirectToAction(nameof(Details), new { id = order.OrderId });
+               var newOrder =  _storeRepo.AddOrder(order);
+                return RedirectToAction(nameof(Details), new { id = newOrder.OrderId });
             }
+
+            //if (ModelState.IsValid)
+            //{
+            //    var newOrder = new Library.Order()
+            //    {
+            //        CustomerId = order.CustomerId,
+            //        LocationId = order.LocationId
+            //    };
+            //    var addNewOrder = _storeRepo.AddOrder(newOrder);
+            //    return RedirectToAction(nameof(Details), new { id = addNewOrder.OrderId });
+            //}
             return View("Index");
         }
 
@@ -92,10 +103,11 @@ namespace StoreApp.Web.Controllers
         
         public ActionResult AddItem(int id)
         {
-            var orderItem = new OrderDetailViewModel();
-
-            orderItem.OrderId = id;
-            orderItem.Quantity = 1;
+            var orderItem = new OrderDetailViewModel
+            {
+                OrderId = id,
+                Quantity = 1
+            };
             var products = _storeRepo.GetProducts();
             foreach (var product in products)
             {

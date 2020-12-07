@@ -7,16 +7,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using StoreApp.DataModel.Repositories;
 using Microsoft.Extensions.Logging;
-using StoreApp.Library.Interfaces;
-using Microsoft.Extensions.Logging.Abstractions;
 
 namespace StoreApplication.WebApp.Controllers
 {
     public class CustomerController : Controller
     {
         private StoreAppRepository _storeRepo;
-        private IStoreAppRepository @object;
-        private NullLogger<CustomerController> nullLogger;
+
         private readonly ILogger<CustomerController> _logger;
 
         public CustomerController(StoreAppRepository storeRepo, ILogger<CustomerController> logger)
@@ -24,12 +21,6 @@ namespace StoreApplication.WebApp.Controllers
             _storeRepo = storeRepo;
 
             _logger = logger;
-        }
-
-        public CustomerController(IStoreAppRepository @object, NullLogger<CustomerController> nullLogger)
-        {
-            this.@object = @object;
-            this.nullLogger = nullLogger;
         }
 
         //GET - Customer
@@ -73,12 +64,23 @@ namespace StoreApplication.WebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(StoreApp.Library.Customer customer)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
+            return View(customer);
+            }
+            try
+            {
+
                 _storeRepo.AddCustomer(customer);
                 return RedirectToAction("Index");
             }
-            return View(customer);
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error While adding customer");
+                ModelState.AddModelError("", "There was some Error, try again");
+
+                return View();
+            }
         }
     }
 }
