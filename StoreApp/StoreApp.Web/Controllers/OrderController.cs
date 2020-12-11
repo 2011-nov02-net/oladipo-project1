@@ -117,7 +117,7 @@ namespace StoreApp.Web.Controllers
                 var product = inventory.Find(o => o.ProductId == item.ProductId);
                 if ( product.Quantity - item.Quantity < 0) 
                 {
-                    return RedirectToAction(nameof(Details), new { id = item.OrderId });
+                    return RedirectToAction(nameof(AddItem), new { id = item.OrderId });
                 }
                 if ( order.OrderDetails.Any(o => o.ProductId == item.ProductId))
                 {

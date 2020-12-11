@@ -13,11 +13,11 @@ namespace StoreApplication.WebApp.Controllers
 {
     public class CustomerController : Controller
     {
-        private IStoreAppRepository _storeRepo;
+        private StoreAppRepository _storeRepo;
 
         private readonly ILogger<CustomerController> _logger;
 
-        public CustomerController(IStoreAppRepository storeRepo, ILogger<CustomerController> logger)
+        public CustomerController(StoreAppRepository storeRepo, ILogger<CustomerController> logger)
         {
             _storeRepo = storeRepo;
 
