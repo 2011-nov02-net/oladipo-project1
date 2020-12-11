@@ -19,12 +19,11 @@ variables:
   buildConfiguration: Release
 
 steps:
-
 - task: UseDotNet@2
-  displayName: 'Use .NET 5 SDK'
+  displayName: dotnet sdk 2.x
   inputs:
     packageType: 'sdk'
-    version: '5.x'
+    version: '2.x'
 
 - task: SonarCloudPrepare@1
   displayName: sonar prepare analysis
@@ -34,6 +33,11 @@ steps:
     scannerMode: 'MSBuild'
     projectKey: '2011-nov02-net_oladipo-project1'
     projectName: 'StoreApp'
+- task: UseDotNet@2
+  displayName: 'Use .NET 5 SDK'
+  inputs:
+    packageType: 'sdk'
+    version: '5.x'
 
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: dotnet build 
