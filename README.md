@@ -1,5 +1,7 @@
 # Discount BestBuy
-##Project Description 
+
+## Project Description 
+
 Discount BestBuy is a ASP.NET MVC Web application that imitates a real world web application that allows customers buy items.
 
 ## Technologies Used
@@ -16,7 +18,7 @@ Discount BestBuy is a ASP.NET MVC Web application that imitates a real world web
    - Can view all store locations.
    - Place orders with multiple items.
    - View their order history.
- -Admins can:
+- Admins can:
    - View inventory for all locations.
    - Update inventory of each locations.
    - Add new product to catalog.
