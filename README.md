@@ -2,7 +2,7 @@
 
 ## Project Description 
 
-Discount BestBuy is a ASP.NET MVC Web application that imitates a real world web application that allows customers buy items.
+Discount BestBuy is a ASP.NET MVC Web application that imitates a real world web application that allows customers buy multiple items per order, at multiple locations, all with persistent data, allowing to view order history per customer.
 
 ## Technologies Used
 - ASP.NET Core 5.0
