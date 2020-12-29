@@ -17,93 +17,93 @@ namespace StoreApp.UnitTest
 {
     public class CustomerControllerTest
     {
-        //[Fact]
-        //public void Index_WithCustomers_DisplaysCustomers()
-        //{
-        //    var mockRepo = new Mock<IStoreAppRepository>();
+        [Fact]
+        public void Index_WithCustomers_DisplaysCustomers()
+        {
+           var mockRepo = new Mock<IStoreAppRepository>();
 
-        //    var Customers = new List<Customer>();
+           var Customers = new List<Customer>();
 
-        //    var customer = new Customer()
-        //    {
-        //        CustomerId = 1,
-        //        FirstName = "abc",
-        //        LastName = "cdef",
-        //        Email = "abc@email.com"
-        //    };
+           var customer = new Customer()
+           {
+               CustomerId = 1,
+               FirstName = "abc",
+               LastName = "cdef",
+               Email = "abc@email.com"
+           };
 
-        //    Customers.Add(customer);
-        //    mockRepo.Setup(r => r.GetCustomers())
-        //        .Returns(Customers);
+           Customers.Add(customer);
+           mockRepo.Setup(r => r.GetCustomers())
+               .Returns(Customers);
 
-        //   var controller = new CustomerController(mockRepo.Object, new NullLogger<CustomerController>());
+          var controller = new CustomerController(mockRepo.Object, new NullLogger<CustomerController>());
 
-        //    IActionResult actionResult = controller.Index(null);
+           IActionResult actionResult = controller.Index(null);
 
-        //    var viewResult = Assert.IsAssignableFrom<ViewResult>(actionResult);
-        //    var customers = Assert.IsAssignableFrom<List<Customer>>(viewResult.Model);
-        //    var customerList = customers.ToList();
-        //    Assert.Single(customerList);
-        //    Assert.Equal("abc", customerList[0].FirstName);
-        //    Assert.Equal("cdef", customerList[0].LastName);
-        //    Assert.Equal("abc@email.com", customerList[0].Email);
+           var viewResult = Assert.IsAssignableFrom<ViewResult>(actionResult);
+           var customers = Assert.IsAssignableFrom<List<Customer>>(viewResult.Model);
+           var customerList = customers.ToList();
+           Assert.Single(customerList);
+           Assert.Equal("abc", customerList[0].FirstName);
+           Assert.Equal("cdef", customerList[0].LastName);
+           Assert.Equal("abc@email.com", customerList[0].Email);
     
-        //}
+        }
 
 
-        //[Fact]
-        //public void Create_Customer()
-        //{
-        //    var mockRepo = new Mock<IStoreAppRepository>();
+        [Fact]
+        public void Create_Customer()
+        {
+           var mockRepo = new Mock<IStoreAppRepository>();
 
-        //    var customer = new Customer()
-        //    {
-        //        CustomerId = 1,
-        //        FirstName = "abc",
-        //        LastName = "cdef",
-        //        Email = "abc@email.com"
-        //    };
+           var customer = new Customer()
+           {
+               CustomerId = 1,
+               FirstName = "abc",
+               LastName = "cdef",
+               Email = "abc@email.com"
+           };
 
-        //    var controller = new CustomerController(mockRepo.Object, new NullLogger<CustomerController>());
+           var controller = new CustomerController(mockRepo.Object, new NullLogger<CustomerController>());
 
-        //    IActionResult actionResult = controller.Create(customer);
+           IActionResult actionResult = controller.Create(customer);
 
       
-        //    Assert.True(controller.ModelState.IsValid);
-        //}
+           Assert.True(controller.ModelState.IsValid);
+        }
 
-        //[Theory]
-        //[InlineData("abc cdef")]
-        //public void Index_WithCustomers_DisplaysCustomersBySearch(string searchString)
-        //{
-        //    var mockRepo = new Mock<IStoreAppRepository>();
+        [Theory]
+        [InlineData("abc cdef")]
+        public void Index_WithCustomers_DisplaysCustomersBySearch(string searchString)
+        {
+           var mockRepo = new Mock<IStoreAppRepository>();
 
-        //    var Customers = new List<Customer>();
+           var Customers = new List<Customer>();
 
-        //    var customer = new Customer()
-        //    {
-        //        CustomerId = 1,
-        //        FirstName = "abc",
-        //        LastName = "cdef",
-        //        Email = "abc@email.com"
-        //    };
+           var customer = new Customer()
+           {
+               CustomerId = 1,
+               FirstName = "abc",
+               LastName = "cdef",
+               Email = "abc@email.com"
+           };
 
-        //    Customers.Add(customer);
-        //    mockRepo.Setup(r => r.GetCustomers())
-        //        .Returns(Customers);
+           Customers.Add(customer);
+           mockRepo.Setup(r => r.GetCustomers())
+               .Returns(Customers);
 
-        //    var controller = new CustomerController(mockRepo.Object, new NullLogger<CustomerController>());
+           var controller = new CustomerController(mockRepo.Object, new NullLogger<CustomerController>());
 
-        //    IActionResult actionResult = controller.Index(searchString);
+           IActionResult actionResult = controller.Index(searchString);
 
-        //    var viewResult = Assert.IsType<ViewResult>(actionResult);
-        //    var customers = Assert.IsAssignableFrom<List<Customer>>(viewResult.Model);
-        //    var singleCustomer = customers.ToList().First();
+           var viewResult = Assert.IsType<ViewResult>(actionResult);
+           var customers = Assert.IsAssignableFrom<List<Customer>>(viewResult.Model);
+           var singleCustomer = customers.ToList().First();
 
-        //    Assert.Equal("abc cdef", singleCustomer.FullName);
+           Assert.Equal("abc cdef", singleCustomer.FullName);
 
 
-        //}
+        }
 
 
     }
